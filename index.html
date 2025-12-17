@@ -39,6 +39,7 @@
                     animation: {
                         'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'progress-stripe': 'progress-stripe 1s linear infinite',
+                        'scroll': 'scroll 20s linear infinite',
                     },
                     keyframes: {
                         'pulse-glow': {
@@ -48,6 +49,10 @@
                         'progress-stripe': {
                             '0%': { backgroundPosition: '1rem 0' },
                             '100%': { backgroundPosition: '0 0' },
+                        },
+                        'scroll': {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
                         }
                     }
                 }
@@ -143,13 +148,95 @@
             )
         };
 
-        // --- DATA ---
+        // --- DATA & TRANSLATIONS ---
         const COUNTRIES = [
-            { code: 'US', name: 'United States', flag: '🇺🇸' },
-            { code: 'AU', name: 'Australia', flag: '🇦🇺' },
-            { code: 'DE', name: 'Germany', flag: '🇩🇪' },
-            { code: 'KR', name: 'South Korea', flag: '🇰🇷' }
+            { code: 'US', name: 'United States', flag: '🇺🇸', lang: 'en' },
+            { code: 'CA', name: 'Canada', flag: '🇨🇦', lang: 'en' },
+            { code: 'AU', name: 'Australia', flag: '🇦🇺', lang: 'en' },
+            { code: 'DE', name: 'Germany', flag: '🇩🇪', lang: 'de' },
+            { code: 'KR', name: 'South Korea', flag: '🇰🇷', lang: 'kr' }
         ];
+
+        const TRANSLATIONS = {
+            en: {
+                heroTitle: "Play Games & Earn Gift Cards",
+                heroSubtitle: "Play Games. Earn Rewards.",
+                availableIn: "Available in",
+                steps: ['Select Region', 'Choose App', 'Play & Earn', 'Verify', 'Unlock'],
+                selectBtn: "Select & Play",
+                downloads: "Downloads",
+                features: [
+                    { t: "Download & Play", d: "Install free games from our curated list." },
+                    { t: "Quick Verification", d: "Securely verify your device eligibility." },
+                    { t: "Redeem Rewards", d: "Get gift cards instantly." }
+                ],
+                verifying: {
+                    title: "Verifying...",
+                    required: "Verification Required",
+                    final: "One final step required to unlock access.",
+                    spamMsg: "To prevent spam, please complete one quick verification task to prove you are human. Your content will unlock immediately after.",
+                    btn: "Unlock & Continue",
+                    disclaimer: "Availability depends on country and device.",
+                    status: ["Connecting to secure server...", "Verifying device compatibility...", "Checking availability...", "Reserving reward allocation...", "Finalizing verification..."]
+                },
+                footer: {
+                    rights: "All rights reserved.",
+                    links: ["Terms", "Privacy", "Contact"]
+                }
+            },
+            de: {
+                heroTitle: "Spiele & Gewinne Gutscheine",
+                heroSubtitle: "Spiele. Gewinne Belohnungen.",
+                availableIn: "Verfügbar in",
+                steps: ['Region wählen', 'App wählen', 'Spielen', 'Prüfen', 'Freischalten'],
+                selectBtn: "Auswählen & Spielen",
+                downloads: "Downloads",
+                features: [
+                    { t: "Laden & Spielen", d: "Installiere kostenlose Spiele aus unserer Liste." },
+                    { t: "Schnelle Prüfung", d: "Sichere Überprüfung der Geräteberechtigung." },
+                    { t: "Belohnungen", d: "Erhalte sofort Geschenkkarten." }
+                ],
+                verifying: {
+                    title: "Überprüfung...",
+                    required: "Überprüfung erforderlich",
+                    final: "Ein letzter Schritt zum Freischalten.",
+                    spamMsg: "Um Spam zu vermeiden, bitte eine kurze Aufgabe erledigen. Dein Inhalt wird sofort danach freigeschaltet.",
+                    btn: "Freischalten & Weiter",
+                    disclaimer: "Verfügbarkeit hängt von Land und Gerät ab.",
+                    status: ["Verbindung zum Server...", "Gerätekompatibilität prüfen...", "Verfügbarkeit prüfen...", "Belohnung reservieren...", "Abschließen..."]
+                },
+                footer: {
+                    rights: "Alle Rechte vorbehalten.",
+                    links: ["AGB", "Datenschutz", "Kontakt"]
+                }
+            },
+            kr: {
+                heroTitle: "게임 플레이 & 기프트 카드 획득",
+                heroSubtitle: "게임을 하고 보상을 받으세요.",
+                availableIn: "사용 가능 국가:",
+                steps: ['국가 선택', '앱 선택', '플레이 & 적립', '확인', '잠금 해제'],
+                selectBtn: "선택 및 플레이",
+                downloads: "다운로드",
+                features: [
+                    { t: "다운로드 & 플레이", d: "엄선된 무료 게임을 설치하세요." },
+                    { t: "빠른 확인", d: "기기 적격성을 안전하게 확인합니다." },
+                    { t: "보상 받기", d: "즉시 기프트 카드를 받으세요." }
+                ],
+                verifying: {
+                    title: "확인 중...",
+                    required: "확인 필요",
+                    final: "액세스 잠금을 해제하려면 마지막 단계가 필요합니다.",
+                    spamMsg: "스팸을 방지하려면 인간임을 증명하는 빠른 확인 작업을 완료하세요. 그 후 콘텐츠가 즉시 잠금 해제됩니다.",
+                    btn: "잠금 해제 및 계속",
+                    disclaimer: "사용 가능 여부는 국가 및 기기에 따라 다릅니다.",
+                    status: ["보안 서버에 연결 중...", "기기 호환성 확인 중...", "가용성 확인 중...", "보상 할당 예약 중...", "확인 완료 중..."]
+                },
+                footer: {
+                    rights: "All rights reserved.",
+                    links: ["이용약관", "개인정보처리방침", "문의하기"]
+                }
+            }
+        };
 
         const APPS = [
             {
@@ -170,15 +257,41 @@
             }
         ];
 
-        const STEPS = [
-            { id: 1, title: 'Select Country' },
-            { id: 2, title: 'Choose App' },
-            { id: 3, title: 'Play & Earn' },
-            { id: 4, title: 'Verify' },
-            { id: 5, title: 'Unlock' }
-        ];
-
         // --- COMPONENTS ---
+
+        function GiftCardTicker() {
+            const cards = [
+                { name: "Amazon", color: "bg-orange-500" },
+                { name: "PayPal", color: "bg-blue-600" },
+                { name: "Google Play", color: "bg-teal-500" },
+                { name: "Apple", color: "bg-gray-800" },
+                { name: "Steam", color: "bg-indigo-900" },
+                { name: "Visa", color: "bg-blue-800" },
+                { name: "Xbox", color: "bg-green-600" },
+                { name: "PlayStation", color: "bg-blue-700" },
+                { name: "Roblox", color: "bg-red-600" },
+                { name: "Netflix", color: "bg-red-700" },
+            ];
+            
+            // Duplicate list for seamless loop
+            const items = [...cards, ...cards];
+
+            return (
+                <div className="w-full overflow-hidden bg-brand-dark/50 border-t border-white/5 backdrop-blur-sm py-6 mt-12">
+                    <div className="flex w-[200%] animate-scroll hover:pause">
+                        {items.map((card, i) => (
+                            <div key={i} className="flex-shrink-0 mx-6 flex flex-col items-center justify-center gap-2 group cursor-pointer">
+                                <div className={`w-32 h-20 rounded-lg ${card.color} shadow-lg flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300`}>
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                                    <span className="font-bold text-white relative z-10">{card.name}</span>
+                                    <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-white/10 rounded-full blur-xl"></div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
 
         function Modal({ isOpen, onClose, title, children }) {
             if (!isOpen) return null;
@@ -197,7 +310,7 @@
             );
         }
 
-        function CountrySelector({ selected, onSelect }) {
+        function CountrySelector({ selected, onSelect, t }) {
             const [isOpen, setIsOpen] = useState(false);
 
             return (
@@ -211,7 +324,7 @@
                         <Icons.ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
                     </button>
 
-                    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Select Region">
+                    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title={t.steps[0]}>
                         <div className="grid grid-cols-1 gap-3">
                             {COUNTRIES.map(country => (
                                 <button
@@ -239,7 +352,7 @@
             );
         }
 
-        function AppCard({ app, onSelect }) {
+        function AppCard({ app, onSelect, t }) {
             return (
                 <div className="glass-panel p-6 rounded-2xl flex flex-col items-center text-center relative overflow-hidden group hover:border-brand-primary/50 transition-all duration-300 transform hover:-translate-y-1">
                     <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${app.color}`}></div>
@@ -254,34 +367,39 @@
                     <div className="flex items-center gap-4 mb-6 text-xs text-gray-500 font-medium">
                         <span className="flex items-center gap-1"><Icons.Star className="w-3 h-3 text-yellow-500" /> {app.rating}</span>
                         <span>•</span>
-                        <span>{app.downloads} Downloads</span>
+                        <span>{app.downloads} {t.downloads}</span>
                     </div>
 
                     <button 
                         onClick={() => onSelect(app)}
                         className="w-full py-3 px-6 bg-white text-brand-dark font-bold rounded-xl hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-lg"
                     >
-                        Select & Play
+                        {t.selectBtn}
                     </button>
                 </div>
             );
         }
 
-        function VerificationScreen({ app, country }) {
+        function VerificationScreen({ app, country, t }) {
             const [progress, setProgress] = useState(0);
-            const [status, setStatus] = useState("Initializing...");
+            const [status, setStatus] = useState(t.verifying.status[0]);
             const [isFinished, setIsFinished] = useState(false);
 
             useEffect(() => {
+                // Reset on mount
+                setProgress(0);
+                setIsFinished(false);
+                setStatus(t.verifying.status[0]);
+
                 let interval;
                 
-                // Sequence of status messages
+                // Sequence of status messages from translation
                 const sequence = [
-                    { p: 10, msg: "Connecting to secure server..." },
-                    { p: 30, msg: `Verifying device compatibility...` },
-                    { p: 50, msg: `Checking ${country.name} availability...` },
-                    { p: 70, msg: "Reserving reward allocation..." },
-                    { p: 75, msg: "Finalizing verification..." }
+                    { p: 10, msg: t.verifying.status[0] },
+                    { p: 30, msg: t.verifying.status[1] },
+                    { p: 50, msg: t.verifying.status[2] },
+                    { p: 70, msg: t.verifying.status[3] },
+                    { p: 75, msg: t.verifying.status[4] }
                 ];
 
                 let currentStep = 0;
@@ -307,11 +425,17 @@
                 }, 80); // Speed of the bar
 
                 return () => clearInterval(interval);
-            }, [country.name]);
+            }, [country.code, t]); // Re-run when language changes
 
             const handleUnlock = () => {
-                // CPA Smartlink Logic Here
+                // ============================================================
+                // CPA SCRIPT / SMARTLINK INTEGRATION
+                // ============================================================
+                // Place your CPA script logic, window.open, or content locker widget trigger here.
+                // For example:
+                console.log("CPA Locker Triggered");
                 window.location.href = "https://example.com/smartlink"; 
+                // ============================================================
             };
 
             return (
@@ -323,12 +447,10 @@
                             </div>
                         </div>
                         <h2 className="text-3xl font-bold mb-2">
-                            {isFinished ? "Verification Required" : "Verifying..."}
+                            {isFinished ? t.verifying.required : t.verifying.title}
                         </h2>
                         <p className="text-gray-400">
-                            {isFinished 
-                                ? "One final step required to unlock access." 
-                                : status}
+                            {isFinished ? t.verifying.final : status}
                         </p>
                     </div>
 
@@ -356,21 +478,24 @@
                         <div className="animate-in slide-in-from-bottom-4 duration-500 fade-in fill-mode-forwards">
                             <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl mb-6 text-yellow-200 text-sm flex items-center gap-3 text-left">
                                 <Icons.Lock className="w-5 h-5 flex-shrink-0" />
-                                <p>To prevent spam, please complete one quick verification task to prove you are human. Your content will unlock immediately after.</p>
+                                <p>{t.verifying.spamMsg}</p>
                             </div>
                             
+                            {/* CPA SCRIPT CONTAINER PLACEHOLDER IF NEEDED */}
+                            <div id="cpa-script-container" className="mb-4"></div>
+
                             <button 
                                 onClick={handleUnlock}
                                 className="group relative w-full py-4 px-8 bg-brand-primary text-white font-bold text-xl rounded-xl overflow-hidden shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:shadow-[0_0_30px_rgba(139,92,246,0.8)] transition-all duration-300"
                             >
                                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
                                 <span className="relative flex items-center justify-center gap-2">
-                                    Unlock & Continue <Icons.ChevronDown className="rotate-270 w-5 h-5" />
+                                    {t.verifying.btn} <Icons.ChevronDown className="rotate-270 w-5 h-5" />
                                 </span>
                             </button>
                             
                             <p className="mt-4 text-xs text-gray-500">
-                                Availability depends on country and device.
+                                {t.verifying.disclaimer}
                             </p>
                         </div>
                     )}
@@ -378,30 +503,24 @@
             );
         }
 
-        function StepIndicator({ currentStep }) {
-            // Mapping UI steps to logic steps.
-            // 1: Selection (Country/App) 
-            // 2: Verification (Play/Verify) 
-            // 3: Unlock
-            
-            // We'll simplify the visual stepper
+        function StepIndicator({ currentStep, t }) {
+            const steps = t.steps;
+            const stepsData = [
+                { id: 1, title: steps[0] },
+                { id: 2, title: steps[1] },
+                { id: 3, title: steps[2] },
+                { id: 4, title: steps[3] },
+                { id: 5, title: steps[4] }
+            ];
+
             return (
                 <div className="w-full max-w-4xl mx-auto mb-12 hidden md:block">
                     <div className="flex justify-between relative">
                         {/* Connecting Line */}
                         <div className="absolute top-1/2 left-0 w-full h-1 bg-white/5 -translate-y-1/2 z-0"></div>
                         
-                        {STEPS.map((step, idx) => {
-                            // Logic to determine active state visually
-                            let status = 'pending'; // pending, active, completed
-                            if (currentStep === 'FINAL' && idx === 4) status = 'active';
-                            else if (currentStep === 'FINAL') status = 'completed';
-                            else if (currentStep === 'VERIFICATION' && idx === 3) status = 'active';
-                            else if (currentStep === 'VERIFICATION' && idx < 3) status = 'completed';
-                            else if (currentStep === 'SELECTION') {
-                                if (idx <= 1) status = 'active'; // Showing broadly active
-                            }
-
+                        {stepsData.map((step, idx) => {
+                            let status = 'pending'; 
                             // Simplified logic for this demo
                             const isCompleted = (currentStep === 'VERIFICATION' && idx < 3) || (currentStep === 'FINAL');
                             const isActive = (currentStep === 'SELECTION' && idx <= 1) || (currentStep === 'VERIFICATION' && idx === 3) || (currentStep === 'FINAL' && idx === 4);
@@ -431,6 +550,9 @@
             const [selectedApp, setSelectedApp] = useState(null);
             const [view, setView] = useState('SELECTION'); // SELECTION, VERIFICATION, FINAL
 
+            // Get current language strings
+            const t = TRANSLATIONS[selectedCountry.lang] || TRANSLATIONS['en'];
+
             const handleAppSelect = (app) => {
                 setSelectedApp(app);
                 setView('VERIFICATION');
@@ -453,10 +575,10 @@
                                     </div>
                                     <div>
                                         <h1 className="text-xl font-bold tracking-tight">Play2Rewards</h1>
-                                        <p className="text-xs text-gray-400 hidden sm:block">Play Games. Earn Rewards.</p>
+                                        <p className="text-xs text-gray-400 hidden sm:block">{t.heroSubtitle}</p>
                                     </div>
                                 </div>
-                                <CountrySelector selected={selectedCountry} onSelect={setSelectedCountry} />
+                                <CountrySelector selected={selectedCountry} onSelect={setSelectedCountry} t={t} />
                             </div>
                         </header>
 
@@ -466,19 +588,19 @@
                                 <div className="w-full max-w-5xl animate-in fade-in slide-in-from-bottom-8 duration-700">
                                     <div className="text-center mb-16 space-y-4">
                                         <h2 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-accent to-brand-primary drop-shadow-sm pb-2">
-                                            Play Games & <br className="hidden md:block" /> Earn Gift Cards
+                                            {t.heroTitle}
                                         </h2>
                                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-accent text-sm font-medium">
                                             <Icons.Globe className="w-4 h-4" />
-                                            Available in {selectedCountry.name}
+                                            {t.availableIn} {selectedCountry.name}
                                         </div>
                                     </div>
 
-                                    <StepIndicator currentStep={view} />
+                                    <StepIndicator currentStep={view} t={t} />
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
                                         {APPS.map(app => (
-                                            <AppCard key={app.id} app={app} onSelect={handleAppSelect} />
+                                            <AppCard key={app.id} app={app} onSelect={handleAppSelect} t={t} />
                                         ))}
                                     </div>
 
@@ -487,39 +609,42 @@
                                             <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4 text-brand-primary">
                                                 <Icons.Smartphone className="w-6 h-6" />
                                             </div>
-                                            <h4 className="font-bold mb-1">Download & Play</h4>
-                                            <p className="text-sm text-gray-500">Install free games from our curated list.</p>
+                                            <h4 className="font-bold mb-1">{t.features[0].t}</h4>
+                                            <p className="text-sm text-gray-500">{t.features[0].d}</p>
                                         </div>
                                         <div className="p-4">
                                             <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4 text-brand-accent">
                                                 <Icons.Shield className="w-6 h-6" />
                                             </div>
-                                            <h4 className="font-bold mb-1">Quick Verification</h4>
-                                            <p className="text-sm text-gray-500">Securely verify your device eligibility.</p>
+                                            <h4 className="font-bold mb-1">{t.features[1].t}</h4>
+                                            <p className="text-sm text-gray-500">{t.features[1].d}</p>
                                         </div>
                                         <div className="p-4">
                                             <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4 text-brand-success">
                                                 <Icons.Gift className="w-6 h-6" />
                                             </div>
-                                            <h4 className="font-bold mb-1">Redeem Rewards</h4>
-                                            <p className="text-sm text-gray-500">Get gift cards instantly.</p>
+                                            <h4 className="font-bold mb-1">{t.features[2].t}</h4>
+                                            <p className="text-sm text-gray-500">{t.features[2].d}</p>
                                         </div>
                                     </div>
                                 </div>
                             )}
 
                             {(view === 'VERIFICATION' || view === 'FINAL') && (
-                                <VerificationScreen app={selectedApp} country={selectedCountry} />
+                                <VerificationScreen app={selectedApp} country={selectedCountry} t={t} />
                             )}
 
                         </main>
+                        
+                        {/* Gift Card Ticker at the bottom */}
+                        <GiftCardTicker />
 
                         <footer className="w-full py-8 border-t border-white/5 text-center text-gray-600 text-sm">
-                            <p>© 2024 Play2Rewards. All rights reserved.</p>
+                            <p>© 2024 Play2Rewards. {t.footer.rights}</p>
                             <div className="flex justify-center gap-4 mt-2">
-                                <span className="hover:text-gray-400 cursor-pointer">Terms</span>
-                                <span className="hover:text-gray-400 cursor-pointer">Privacy</span>
-                                <span className="hover:text-gray-400 cursor-pointer">Contact</span>
+                                {t.footer.links.map((link, i) => (
+                                    <span key={i} className="hover:text-gray-400 cursor-pointer">{link}</span>
+                                ))}
                             </div>
                         </footer>
 
